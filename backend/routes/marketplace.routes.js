@@ -6,40 +6,62 @@ const { MarketPlaceModel } = require("../models/MarketPlaceModel");
 
 
 MarketPlaceRouter.get("/", async (req, res) => {
-    try {
-        const carList = await MarketPlaceModel.aggregate([
-            {
-                $lookup: {
-                    from: 'oemspecs',
-                    localField: 'oemsId',
-                    foreignField: '_id',
-                    as: 'specs'
-                }
-            },
-            { $unwind: '$specs' },
-            {
-                $project: {
-                    _id: 1,
-                    image: 1,
-                    title: 1,
-                    price: 1,
-                    kmsOnOdometer: 1,
-                    majorScratches: 1,
-                    originalPaint: 1,
-                    accidentsReported: 1,
-                    previousBuyers: 1,
-                    registrationPlace: 1,
-                    dealerId: 1,
-                    model: '$specs.model',
-                    year: '$specs.year',
-                    listPrice: '$specs.listPrice',
-                    colors: '$specs.colors',
-                    mileage: '$specs.mileage',
-                    power: '$specs.power',
-                    maxSpeed: '$specs.maxSpeed',
-                }
+    const { filterField, order, colorFilter } = req.query
+    const sortStage = {
+        $sort: {
+            [filterField]: order === "asc" ? 1 : -1
+        }
+    }
+    const colorStage = {
+        $match: {
+            colors: {
+                $regex: colorFilter,
+                $options: "i"
             }
-        ])
+        }
+    }
+    const pipeLine = [
+        {
+            $lookup: {
+                from: 'oemspecs',
+                localField: 'oemsId',
+                foreignField: '_id',
+                as: 'specs'
+            }
+        },
+        { $unwind: '$specs' },
+        {
+            $project: {
+                _id: 1,
+                image: 1,
+                title: 1,
+                price: 1,
+                kmsOnOdometer: 1,
+                majorScratches: 1,
+                originalPaint: 1,
+                accidentsReported: 1,
+                previousBuyers: 1,
+                registrationPlace: 1,
+                dealerId: 1,
+                model: '$specs.model',
+                year: '$specs.year',
+                listPrice: '$specs.listPrice',
+                colors: '$specs.colors',
+                mileage: '$specs.mileage',
+                power: '$specs.power',
+                maxSpeed: '$specs.maxSpeed',
+            }
+        },
+
+    ]
+    if (filterField !== "") {
+        pipeLine.push(sortStage)
+    }
+    if (colorFilter !== "") {
+        pipeLine.push(colorStage)
+    }
+    try {
+        const carList = await MarketPlaceModel.aggregate(pipeLine)
         res.send(carList)
     } catch (error) {
         res.status(500).send({
@@ -101,7 +123,7 @@ MarketPlaceRouter.get("/details/:id", async (req, res) => {
     const id = req.params.id
     try {
         const cars = await MarketPlaceModel.findById(id)
-             
+
         res.send(cars)
     } catch (error) {
         res.status(500).send({
@@ -124,10 +146,10 @@ MarketPlaceRouter.get("/dealer/inventory", DealerAuthentication, async (req, res
     }
 })
 MarketPlaceRouter.post("/", DealerAuthentication, async (req, res) => {
-    const { userId,...rest } = req.body
+    const { userId, ...rest } = req.body
     if (userId) {
         try {
-            const task = new MarketPlaceModel({ ...rest,dealerId: userId })
+            const task = new MarketPlaceModel({ ...rest, dealerId: userId })
             await task.save();
             res.send({
                 message: "Car Added!",
@@ -150,7 +172,7 @@ MarketPlaceRouter.post("/", DealerAuthentication, async (req, res) => {
 MarketPlaceRouter.patch("/:id", DealerAuthentication, async (req, res) => {
     const id = req.params.id;
 
-    const { userId,...rest } = req.body
+    const { userId, ...rest } = req.body
     try {
         await MarketPlaceModel.findByIdAndUpdate(id, { ...rest })
         res.send({

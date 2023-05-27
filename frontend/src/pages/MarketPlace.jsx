@@ -6,34 +6,48 @@ import SubNavbar from '../components/SubNavbar';
 
 const MarketPlace = () => {
   const { carList, getCarList } = useContext(MarketPlaceContext)
+  const [priceFilter, setPriceFilter] = useState("")
+  const [mileageFilter, setMileageFilter] = useState("")
+  const [colorFilter, setColorFilter] = useState("")
+
+
+  const applyFilter = (e) => {
+    const filterField = e.target.name
+    const order = e.target.value
+    if (filterField === "price") {
+      setPriceFilter(order)
+    } else if (filterField === "mileage") {
+      setMileageFilter(order)
+    }
+    getCarList(filterField, order,colorFilter)
+  }
 
   useEffect(() => {
-    getCarList()
-  }, [])
+    getCarList("","",colorFilter)
+  }, [colorFilter])
   return (
     <>
       <div className={Styles.cars_list_container}>
         <SubNavbar />
         <div className={Styles.filters_container}>
-          <select>
+          <select name="price" value={priceFilter} onChange={applyFilter}>
             <option value="">Filter by Price</option>
-            <option value="" >Price : Low to High</option>
-            <option value="">Price : High to Low</option>
+            <option value="asc" >Price : Low to High</option>
+            <option value="desc">Price : High to Low</option>
           </select>
-          <select>
+          <select value={colorFilter} onChange={(e) => setColorFilter(e.target.value)}>
             <option value="">Filter by Colors</option>
-            <option value="">All</option>
-            <option value="">Black</option>
-            <option value="">White</option>
-            <option value="">Red</option>
-            <option value="">Green</option>
-            <option value="">Yellow</option>
-            <option value="">Silver</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="silver">Silver</option>
           </select>
-          <select>
+          <select name="mileage" value={mileageFilter} onChange={applyFilter}>
             <option value="">Filter by Mileage</option>
-            <option value="">Mileage : Low to High</option>
-            <option value="">Mileage : High to Low</option>
+            <option value="asc">Mileage : Low to High</option>
+            <option value="desc">Mileage : High to Low</option>
           </select>
         </div>
         <div>
