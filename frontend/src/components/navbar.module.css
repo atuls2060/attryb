@@ -1,0 +1,32 @@
+.navbar {
+    background: teal;
+}
+
+.navbar>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 15px 20px;
+    width: 90%;
+    margin: auto;
+}
+.navbar > div > h3{
+    cursor: pointer;
+}
+.navbar>div>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar>div>div>a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar>div>div>button {
+    padding: 5px 15px;
+    cursor: pointer;
+}

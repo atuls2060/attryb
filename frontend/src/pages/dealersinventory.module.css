@@ -1,0 +1,37 @@
+.inventory>button {
+    background-color: teal;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.inventory>button:hover {
+    background-color: #019595;
+}
+
+.inventory > div{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 20px auto;
+}
+
+@media screen and (max-width: 550px) {
+    .inventory > div  {
+         grid-template-columns: repeat(1, 1fr);
+     }
+ }
+ 
+ @media screen and (min-width: 551px) and (max-width: 900px) {
+    .inventory > div  {
+         grid-template-columns: repeat(2, 1fr);
+     }
+ }
+ 
+ @media screen and (min-width: 901px) and (max-width: 1400px) {
+    .inventory > div  {
+         grid-template-columns: repeat(3, 1fr);
+     }
+ }

@@ -1,0 +1,38 @@
+.card {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+}
+
+.card:hover {
+    scale: 1.025;
+}
+
+.card>a {
+    text-decoration: none;
+    color: black;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card button {
+    background-color: teal;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.card button:hover {
+    background-color: #019595;
+}
+
+.card button:last-child {
+    background-color: red;
+}

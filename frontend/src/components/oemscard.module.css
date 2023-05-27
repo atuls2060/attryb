@@ -1,0 +1,19 @@
+.oems_card {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    margin-bottom: 20px;
+}
+
+.oems_card>h3 {
+    margin-bottom: 10px;
+}
+
+.oems_card>p {
+    line-height: 35px;
+}
+
+.oems_card>p>span {
+    padding: 2px 4px;
+    margin-right: 5px;
+}

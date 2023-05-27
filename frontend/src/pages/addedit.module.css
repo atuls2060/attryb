@@ -1,0 +1,64 @@
+.add_edit {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.add_edit > div{
+    width: 40%;
+}
+.add_edit > img{
+    width: 50%;
+    min-width: 400px;
+}
+
+.add_edit>div> select{
+    padding: 7px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.add_edit>div>input {
+    display: block;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 7px;
+    margin-bottom: 15px;
+}
+.add_edit>div>div + div{
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+
+.add_edit > div:last-child > h2 {
+    margin-bottom: 15px;
+}
+.add_edit>div>button {
+    background-color: teal;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.add_edit>div>button:hover {
+    background-color: #019595;
+}
+
+
+@media screen and (max-width: 450px) {
+     .add_edit > div{
+        width: 100%;
+     }
+ }
+
+@media screen and (min-width: 451px) and (max-width: 900px) {
+    .add_edit > div{
+       min-width: 200px;
+       width: 80%;
+    }
+}

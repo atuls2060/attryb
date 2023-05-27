@@ -1,0 +1,11 @@
+.orders_table {
+    width: 100%;
+    text-align: center;
+    min-width: 770px;
+    overflow-x: auto;
+}
+
+.orders_table th,
+.orders_table td {
+    padding: 10px;
+}

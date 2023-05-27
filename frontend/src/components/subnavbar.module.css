@@ -1,0 +1,15 @@
+.links_container{
+    display: flex;
+    gap: 20px;
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.sub_navbar > h2{
+    font-weight: lighter;
+} 
+.sub_navbar > h3 {
+    margin-top: 5px;
+    font-weight: lighter;
+}

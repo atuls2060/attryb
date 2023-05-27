@@ -1,0 +1,28 @@
+.car_details{
+    display: flex;
+    gap: 40px;
+}
+.car_details > img{
+    max-width: 450px;
+}
+
+.place_order_btn{
+    background-color: teal;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+.place_order_btn:hover {
+    background-color: #019595;
+}
+
+@media screen and (max-width: 700px) {
+    .car_details {
+         flex-direction: column;
+     }
+ }
